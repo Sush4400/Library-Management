@@ -32,7 +32,7 @@ class Publisher(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        db_name = "publishers"
+        db_table = "publishers"
 
     def __str__(self):
         return self.name
@@ -45,8 +45,10 @@ class Category(models.Model):
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    class Mets:
+    class Meta:
         db_table = "categories"
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
         ordering = ["name"]
 
 
@@ -100,3 +102,4 @@ class BookCopy(models.Model):
             models.Index(fields=["barcode"]),
             models.Index(fields=["status"])
         ]
+        verbose_name_plural = "Book Copies"
