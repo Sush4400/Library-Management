@@ -2,6 +2,21 @@ from rest_framework.views import APIView, Response
 
 
 # Create your views here.
-class Borrow(APIView):
+class BorrowBookView(APIView):
+    def post(self, request):
+        pass
+
+
+class ReturnBookView(APIView):
+    def post(self, request):
+        pass
+
+
+class BorrowHistoryView(APIView):
     def get(self, request):
-        return Response({"status": True, "message": "Borrows Fetched."})
+        pass
+
+
+class UserBorrowedBooksView(APIView):
+    def get(self, request, user_id):
+        pass

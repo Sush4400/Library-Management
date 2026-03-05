@@ -11,14 +11,14 @@ class User(AbstractUser):
         MEMBER = "MEMBER", "Member"
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    usename = models.CharField(max_length=50, blank=False)
-    email = models.EmailField(unique=True, blank=False)
     full_name = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=10)
     role = models.CharField(max_length=20, choices=Role.choices, default=Role.MEMBER)
     is_active = models.BooleanField(default=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
+    email = models.EmailField(unique=True)
+    
     class Meta:
         db_table = "users"
         indexes = [

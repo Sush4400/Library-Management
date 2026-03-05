@@ -23,10 +23,10 @@ class Author(models.Model):
 
 class Publisher(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, blank=False)
     address = models.TextField(blank=True)
     website = models.URLField(blank=True)
-    email = models.EmailField(blank=True)
+    email = models.EmailField(blank=False)
     phone = models.CharField(max_length=10, blank=True)
     is_deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
