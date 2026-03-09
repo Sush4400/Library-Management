@@ -1,10 +1,8 @@
 from django.db import models
-import uuid
 
 
 # Create your models here.
 class Author(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=50, blank=False, db_index=True)
     dob = models.DateField()
     nationality = models.CharField(max_length=50, blank=True)
@@ -22,7 +20,6 @@ class Author(models.Model):
     
 
 class Publisher(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=50, blank=False)
     address = models.TextField(blank=True)
     website = models.URLField(blank=True)
@@ -39,7 +36,6 @@ class Publisher(models.Model):
 
 
 class Category(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=50, blank=False)
     description = models.TextField(blank=True)
     is_active = models.BooleanField(default=True)
@@ -53,11 +49,10 @@ class Category(models.Model):
 
 
 class Book(models.Model):
-    book_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100, unique=True, null=False)
     authors = models.ManyToManyField(Author, related_name="books")
     publisher = models.ForeignKey(Publisher, on_delete=models.PROTECT, related_name="books")
-    category = models.ManyToManyField(Category, related_name="books")
+    categories = models.ManyToManyField(Category, related_name="books")
     description= models.TextField(blank=True)
     publication_date = models.DateField()
     edition = models.CharField(max_length=50, blank=True)
@@ -85,7 +80,6 @@ class BookCopy(models.Model):
         LOST = "LOST", "Lost"
         DAMAGED = "DAMAGED", "Damaged"
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="copies")
     barcode =  models.CharField(max_length=50, blank=True)
     shelf_location = models.CharField(max_length=50, blank=True)

@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'BookManagement.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'book_mgmt',
+        'NAME': 'library_mgmt',
         'USER': 'postgres',
         'PASSWORD': 'root',
         'HOST': 'localhost',
@@ -147,7 +147,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),  # short lifespan
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),  # short lifespan
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,

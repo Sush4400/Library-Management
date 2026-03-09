@@ -2,7 +2,7 @@ from rest_framework.views import APIView, Response
 from rest_framework.permissions import IsAuthenticated
 from ..models import *
 from django.db import transaction
-from core.pemissions import RolePermission
+from core.permissions import RolePermission
 
 
 
@@ -88,7 +88,7 @@ class PublisherUpdateView(APIView):
     permission_classes = [RolePermission]
     allowed_roles = ["ADMIN", "LIBRARIAN"]
 
-    def put(self, request, publisher_id):
+    def patch(self, request, publisher_id):
         try:
             data = request.data
             name = data.get("name")

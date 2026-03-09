@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-import uuid
 
 
 # Create your models here.
@@ -10,7 +9,6 @@ class User(AbstractUser):
         LIBRARIAN = "LIBRARIAN", "Librarian"
         MEMBER = "MEMBER", "Member"
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     full_name = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=10)
     role = models.CharField(max_length=20, choices=Role.choices, default=Role.MEMBER)

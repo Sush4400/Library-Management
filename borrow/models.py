@@ -1,11 +1,9 @@
 from django.db import models
-import uuid
 from books.models import BookCopy
 
 
 # Create your models here.
 class Borrow(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey("users.User", on_delete=models.CASCADE, related_name="borrowed_books")
     book_copy = models.ForeignKey(BookCopy, on_delete=models.PROTECT, related_name="borrows")
     borrow_date = models.DateTimeField(auto_now_add=True)
