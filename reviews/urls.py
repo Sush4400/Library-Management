@@ -3,5 +3,6 @@ from .views import *
 
 
 urlpatterns = [
-    path("", Reviews.as_view(), name="reviews")
+    path("", ReviewAPIView.as_view()),
+    path("<int:id>/", ReviewRetrieveUpdateDestroyAPIView.as_view())
 ]
