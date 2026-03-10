@@ -12,7 +12,7 @@ from users.models import User
 class BorrowBookView(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request):
-        book_id = request.data.gett("book_id")
+        book_id = request.data.get("book_id")
 
         borrow = BorrowService.borrow_book(
             user=request.user,

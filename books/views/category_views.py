@@ -22,7 +22,6 @@ class CategoryListCreateView(generics.ListCreateAPIView):
 
 
 class CategoryRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
-    print("here")
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     lookup_field = "id"

@@ -24,4 +24,6 @@ urlpatterns = [
     path("books/<int:id>/", BookRetrieveUpdateDestroyAPIView.as_view(),),
 
     # book_copy urls
+    path("bookcopies/", BookListCreateView.as_view()),
+    path("bookcopies/<int:id>/", BookCopyRetrieveUpdateDestroyAPIView.as_view(),),
 ]

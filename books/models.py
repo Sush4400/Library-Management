@@ -75,7 +75,7 @@ class Book(models.Model):
 
 class BookCopy(models.Model):
     class Status(models.TextChoices):
-        AVAILABLE = "AVAILABEL", "Available"
+        AVAILABLE = "AVAILABLE", "Available"
         BORROWED = "BORROWED", "Borrowed"
         LOST = "LOST", "Lost"
         DAMAGED = "DAMAGED", "Damaged"

@@ -48,5 +48,9 @@ class BookRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     
     def get_serializer_class(self):
         if self.request.method in ["PUT", "PATCH", "DELETE"]:
-            self.serializer_class = BookWriteSerializer
-        self.serializer_class = BookListSerializer
+            return BookWriteSerializer
+        return BookListSerializer
+    
+    def perform_destroy(self, instance):
+        instance.is_deleted = True
+        instance.save(update_fields=['is_deleted'])

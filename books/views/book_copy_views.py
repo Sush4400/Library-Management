@@ -11,7 +11,7 @@ class BookListCreateView(ListCreateAPIView):
 
     def get_queryset(self):
         return BookCopy.objects.select_related('book').filter(is_deleted=False).only(
-            'shelf_location', 'status', 'barcode'
+            'shelf_location', 'status', 'barcode', 'book'
         )
     
     def get_permissions(self):
@@ -21,8 +21,7 @@ class BookListCreateView(ListCreateAPIView):
         return [IsAuthenticated()]
     
     def perform_create(self, serializer):
-        with transaction.atomic():
-            serializer.save()
+        serializer.save()
 
 
 class BookCopyRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):

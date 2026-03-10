@@ -13,6 +13,7 @@ class ReturnService:
     @transaction.atomic
     def return_book(borrow_id):
         borrow = Borrow.objects.select_related("book_copy").get(id=borrow_id)
+        print("borrow: ", borrow)
         if borrow.is_returned:
             raise Exception("Book Already Returned!")
         

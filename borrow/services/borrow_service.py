@@ -23,7 +23,7 @@ class BorrowService:
         
         # lock available book copy
         book_copy = BookCopy.objects.select_for_update().filter(
-            book=book_id, is_available=True
+            book=book_id, status="AVAILABLE"
         ).first()
 
         if not book_copy:
