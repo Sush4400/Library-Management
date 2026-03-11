@@ -1,0 +1,2 @@
+User=actor Action=1 Model=Category Changes={'name': ('Scienc', 'Science')}
+User=None Action=1 Model=Category ObjectID=3 Changes={'name': ('Science', 'Scienc')}

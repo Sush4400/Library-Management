@@ -1,0 +1,8 @@
+"PATCH /api/categories/3/ HTTP/1.1" 200 74
+C:\Users\Ganesh\Desktop\Library Management\BookManagement\BookManagement\settings.py changed, reloading.
+Watching for file changes with StatReloader
+"PATCH /api/categories/3/ HTTP/1.1" 200 75
+"GET /api/admin/auditlog/logentry/? HTTP/1.1" 200 21449
+C:\Users\Ganesh\Desktop\Library Management\BookManagement\books\signals.py changed, reloading.
+Watching for file changes with StatReloader
+"PATCH /api/categories/3/ HTTP/1.1" 200 74

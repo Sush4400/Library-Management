@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 from datetime import timedelta
 
@@ -41,8 +41,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt.token_blacklist',
+    'django_filters',
+    'auditlog',
     'users',
-    'books',
+    'books.apps.BooksConfig',
     'borrow',
     'core',
     'reviews',
@@ -54,6 +56,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'auditlog.middleware.AuditlogMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -140,10 +143,15 @@ AUTH_USER_MODEL = 'users.User'
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.SessionAuthentication",
+        # "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+     "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend",
+        "rest_framework.filters.SearchFilter",
+        "rest_framework.filters.OrderingFilter",
+    ]
 }
 
 SIMPLE_JWT = {
@@ -152,4 +160,40 @@ SIMPLE_JWT = {
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
     "AUTH_HEADER_TYPES": ("Bearer",),
+}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+
+    "handlers": {
+        "applog_file": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "maxBytes": 1024*1024*5,
+            "backupCount": 5,
+            # "class": "logging.FileHandler",
+            "filename": "logs/app.log",
+        },
+        "audit_file": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "maxBytes": 1024*1024*5,
+            "backupCount": 5,
+            # "class": "logging.FileHandler",
+            "filename": "logs/audit.log",
+        },
+    },
+
+    "loggers": {
+        "django": {
+            "handlers": ["applog_file"],
+            "level": "INFO",
+            "propagate": True,
+        },
+
+        "auditlog": {
+            "handlers": ["audit_file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
 }

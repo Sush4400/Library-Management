@@ -12,6 +12,10 @@ class CategoryListCreateView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
+    filterset_fields = ["is_active"]
+    search_fields = ["name"]
+    ordering_fields = ["id"]
+
     def get_permissions(self):
 
         if self.request.method == "POST":
