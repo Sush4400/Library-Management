@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'borrow',
     'core',
     'reviews',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -197,3 +198,22 @@ LOGGING = {
         },
     },
 }
+
+# CELERY Settings
+CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
+
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
+
+
+# Gmail SMTP configs
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = "beherasusanta4400@gmail.com"
+EMAIL_HOST_PASSWORD = "qwbu jfbb htle ycec"

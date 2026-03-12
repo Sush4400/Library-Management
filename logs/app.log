@@ -6,3 +6,10 @@ Watching for file changes with StatReloader
 C:\Users\Ganesh\Desktop\Library Management\BookManagement\books\signals.py changed, reloading.
 Watching for file changes with StatReloader
 "PATCH /api/categories/3/ HTTP/1.1" 200 74
+Watching for file changes with StatReloader
+Internal Server Error: /api/users/
+"POST /api/users/ HTTP/1.1" 500 363
+Watching for file changes with StatReloader
+Internal Server Error: /api/users/
+"POST /api/users/ HTTP/1.1" 500 362
+"POST /api/users/ HTTP/1.1" 201 66

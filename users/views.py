@@ -4,6 +4,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.db.models import Q
+from .tasks import send_welcome_email
+
 
 '''
 always hash the password:
@@ -45,6 +47,7 @@ class UsersView(APIView):
             username = data.get("username")
             email = data.get("email")
             phone_number = data.get("phone_number")
+            full_name = data.get("full_name")
 
             existing_user = User.objects.filter(
                 Q(username=username) | Q(email=email) | Q(phone_number=phone_number)
@@ -61,10 +64,13 @@ class UsersView(APIView):
 
             user = User.objects.create_user(
                 username=data.get("username"),
-                email=data.get("email"),
-                phone_number=data.get("phone_number"),
+                full_name=full_name,
+                email=email,
+                phone_number=phone_number,
                 password=data.get("password")
             )
+
+            send_welcome_email.delay(user.email, user.full_name)
 
             return Response({
                 "status": True,
