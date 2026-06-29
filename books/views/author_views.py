@@ -8,8 +8,11 @@ from core.permissions import RolePermission
 
 
 class AuthorListCreateView(ListCreateAPIView):
-
     serializer_class = AuthorSerializer
+
+    search_fields = ['name', 'dob']
+    filteset_fields = ['is_active', 'nationality']
+    ordering_fields = ['id']
 
     def get_queryset(self):
         return Author.objects.filter(is_deleted=False).only(

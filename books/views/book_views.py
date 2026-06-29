@@ -22,6 +22,10 @@ class BookCreateAPIView(CreateAPIView):
 class BookListAPIView(ListAPIView):
     serializer_class = BookListSerializer
 
+    search_fields = ['title']
+    filterset_fields = ['categories', 'publisher', 'language']
+    ordering_fields = ['id']
+
     def get_permissions(self):
         return [IsAuthenticated()]
     

@@ -9,6 +9,10 @@ from ..serializers import BookCopySerializer
 class BookListCreateView(ListCreateAPIView):
     serializer_class = BookCopySerializer
 
+    search_fields = ['barcode', 'shelf_location']
+    filterset_fields = ['status', 'book']
+    sorting_fields = ['id']
+
     def get_queryset(self):
         return BookCopy.objects.select_related('book').filter(is_deleted=False).only(
             'shelf_location', 'status', 'barcode', 'book'
